@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-transparent_c9fbf0d1.png";
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-v2-transparent_e546ae38.png";
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -62,7 +62,7 @@ export default function Navbar() {
               className="text-xs"
               style={{ fontFamily: "'Source Sans 3', sans-serif", color: "oklch(0.50 0.06 65)", letterSpacing: "0.04em" }}
             >
-              Minor Repairs, Major Satisfaction
+              Reliable Renovations, Trusted Results
             </span>
           </div>
         </a>
