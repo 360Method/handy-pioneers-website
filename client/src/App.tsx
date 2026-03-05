@@ -5,6 +5,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
+import ThankYou from "./pages/ThankYou";
 
 function Router() {
   return (
@@ -12,6 +13,8 @@ function Router() {
       <Route path="/" component={Home} />
       {/* Individual project detail pages — open in new tab from gallery */}
       <Route path="/project/:slug" component={ProjectDetail} />
+      {/* Post-inquiry thank you page */}
+      <Route path="/thankyou" component={ThankYou} />
       {/* 301-style redirects: all old paths → home */}
       <Route path="/about" component={Home} />
       <Route path="/services" component={Home} />
