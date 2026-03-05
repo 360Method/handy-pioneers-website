@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { CheckCircle, Star, ArrowLeft, Phone } from "lucide-react";
 
 const LOGO_URL =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-v2-transparent_e546ae38.png";
+  "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-full-logo_4f724ec4.jpg";
 
 export default function ThankYou() {
   const [countdown, setCountdown] = useState(10);
