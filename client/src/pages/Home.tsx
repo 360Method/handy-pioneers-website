@@ -38,11 +38,11 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBar />
+        <About />
         <Services />
         <HowItWorks />
         <Gallery />
         <Testimonials />
-        <About />
         <FinalCTA />
       </main>
       <Footer />
