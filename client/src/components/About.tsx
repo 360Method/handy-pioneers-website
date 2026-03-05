@@ -1,0 +1,130 @@
+import { CheckCircle } from "lucide-react";
+
+const credentials = [
+  "Licensed Contractor — WA License HANDYP*761NH",
+  "Insured up to $1,000,000",
+  "1-Year Labor Guarantee on all projects",
+  "Clear communication & efficient timelines",
+  "Serving Clark County since day one",
+];
+
+export default function About() {
+  return (
+    <section id="about" className="py-20" style={{ backgroundColor: "oklch(1 0 0)" }}>
+      <div className="container">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Content */}
+          <div className="reveal">
+            <div className="section-divider mb-4">
+              <span className="section-divider-label">Who We Are</span>
+            </div>
+            <h2
+              className="text-4xl md:text-5xl font-bold mb-6"
+              style={{ fontFamily: "'Playfair Display', serif", color: "oklch(0.22 0.07 160)" }}
+            >
+              Built on Craftsmanship &amp; Trust
+            </h2>
+            <p
+              className="text-lg leading-relaxed mb-4"
+              style={{ color: "oklch(0.40 0.02 80)", fontFamily: "'Source Sans 3', sans-serif" }}
+            >
+              At Handy Pioneers, we help homeowners transform their spaces through kitchen,
+              bathroom, and deck remodels, as well as general home updates that improve both
+              function and style.
+            </p>
+            <p
+              className="text-base leading-relaxed mb-8"
+              style={{ color: "oklch(0.50 0.02 80)", fontFamily: "'Source Sans 3', sans-serif" }}
+            >
+              Founded by <strong>Marcin Micek</strong>, Handy Pioneers was built on years of
+              hands-on experience in property management, residential renovations, and
+              construction. We understand that home projects — big or small — require careful
+              planning, attention to detail, and a team you can trust.
+            </p>
+
+            {/* Credentials */}
+            <ul className="space-y-3 mb-8">
+              {credentials.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <CheckCircle
+                    size={20}
+                    className="shrink-0 mt-0.5"
+                    style={{ color: "oklch(0.65 0.14 65)" }}
+                  />
+                  <span
+                    className="text-sm"
+                    style={{ color: "oklch(0.40 0.02 80)", fontFamily: "'Source Sans 3', sans-serif" }}
+                  >
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <button
+              className="hcp-button"
+              onClick={() => (window as any).HCPWidget?.openModal()}
+            >
+              Work With Us
+            </button>
+          </div>
+
+          {/* Right: Visual */}
+          <div className="reveal" style={{ transitionDelay: "150ms" }}>
+            <div className="relative">
+              {/* Main image */}
+              <div
+                className="rounded-2xl overflow-hidden shadow-2xl"
+                style={{ aspectRatio: "4/5" }}
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
+                  alt="Marcin Micek, founder of Handy Pioneers"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Floating credential card */}
+              <div
+                className="absolute -bottom-6 -left-6 rounded-xl p-5 shadow-xl"
+                style={{ backgroundColor: "oklch(0.32 0.07 160)", maxWidth: "220px" }}
+              >
+                <div
+                  className="text-3xl font-bold text-white mb-1"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  5★
+                </div>
+                <div
+                  className="text-sm text-white/80 leading-tight"
+                  style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                >
+                  Rated on Google &amp; Facebook by Clark County homeowners
+                </div>
+              </div>
+
+              {/* Floating license card */}
+              <div
+                className="absolute -top-4 -right-4 rounded-xl p-4 shadow-xl"
+                style={{ backgroundColor: "oklch(0.65 0.14 65)" }}
+              >
+                <div
+                  className="text-xs font-bold text-white uppercase tracking-wider"
+                  style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                >
+                  Licensed &amp; Insured
+                </div>
+                <div
+                  className="text-xs text-white/80 mt-1"
+                  style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                >
+                  WA Lic. HANDYP*761NH
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
