@@ -117,13 +117,15 @@ export default function ProjectDetail() {
       </header>
 
       {/* ── Hero Image ── */}
-      <div className="w-full overflow-hidden" style={{ maxHeight: "480px" }}>
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full object-cover"
-          style={{ maxHeight: "480px", objectPosition: "center" }}
-        />
+      <div className="max-w-4xl mx-auto px-4 pt-6">
+        <div className="overflow-hidden rounded-xl" style={{ maxHeight: "480px" }}>
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full object-cover"
+            style={{ maxHeight: "480px", objectPosition: "center" }}
+          />
+        </div>
       </div>
 
       {/* ── Article Body ── */}
