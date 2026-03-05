@@ -3,40 +3,14 @@
  * Design: Pacific Northwest Craftsman
  * Two tabs: "Project Stories" (carousel with blog cards) and "Photo Gallery" (masonry grid)
  * Both tabs share a single section header and CTA.
+ *
+ * Project cards now link to /project/:slug — opens in a new browser tab.
+ * Project data is imported from @/lib/projects so it stays in sync with the detail pages.
  */
 
 import { useState, useRef } from "react";
-import { X, Calendar, Tag, ChevronLeft, ChevronRight, MapPin, ZoomIn, BookOpen, Images } from "lucide-react";
-
-// ─── PROJECT STORIES DATA ─────────────────────────────────────────────────────
-const CDN = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o";
-
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  date: string;
-  excerpt: string;
-  description: string;
-  image: string;
-  tags: string[];
-  location: string;
-}
-
-const projects: Project[] = [
-  { id: 1, title: "Porch Step Repair in Battle Ground", category: "Stairs & Railings", date: "November 21, 2025", excerpt: "Rebuilt two rotting steps and installed new railings for a safe, beautiful front porch.", description: "At Handy Pioneers, we believe in making your home safer and more comfortable. Realizing the original front porch steps were not safe and starting to warp, we rolled up our sleeves and got to work. Our expertise in porch step repair came in handy as we rebuilt the two steps and railings. Now, you can safely use your front porch without any worries.", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/porch-step-before-after_e99469e2.png", tags: ["battle ground handyman", "battle ground wa", "Clark County", "porch step repair", "railings"], location: "Battle Ground, WA" },
-  { id: 2, title: "Gutter Cleaning Service in Vancouver", category: "Gutters", date: "October 16, 2025", excerpt: "Removed debris, flushed downspouts, and tidied the roof — turning overflowing gutters into an efficient drainage system.", description: "One thing we at Handy Pioneers understand is that rainwater flowing over your gutter can lead to a mess. Our gutter cleaning service removed accumulated debris, flushed the downspouts, and tidied up the roof — turning over-flooding gutters back into an efficient drainage system.", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/gutter-cleaning-before-after_59d3998e.png", tags: ["gutter cleaning", "Clark County", "debris removal", "downspout flushing", "Vancouver WA"], location: "Vancouver, WA" },
-  { id: 3, title: "Graffiti Removal and Painting in Vancouver", category: "Painting", date: "October 1, 2025", excerpt: "Transformed a vandalized vacant building with a fresh coat of paint — quick, efficient, and restored to full curb appeal.", description: "When a busy out-of-town client found themselves with a graffiti-covered vacant building, we jumped in immediately. After swiftly cleaning up the trash, we transformed the vandalized exterior with a fresh coat of paint — relieving our client from the burden while restoring their property's look and value.", image: `${CDN}/graffiti-removal_9fbe4828.png`, tags: ["graffiti removal", "painting service", "building maintenance", "Vancouver WA"], location: "Vancouver, WA" },
-  { id: 4, title: "Porch Screen Installation in Vancouver", category: "Screen Installation", date: "October 1, 2025", excerpt: "Installed a privacy screen and rod for a homeowner who needed it done right but lacked the time and tools.", description: "This client wanted a porch screen and rod installed but lacked the necessary time and tools. Our skilled handymen stepped in, ensuring a quick and efficient installation that met the client's desires — proving how our quality handyman services make a big difference.", image: "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/porch-screen-before-after_71f6836e.png", tags: ["porch screen installation", "privacy screen", "rod installation", "Clark County", "Vancouver WA"], location: "Vancouver, WA" },
-  { id: 5, title: "Kitchen Water Damage Repair in Camas", category: "Home Repair", date: "September 18, 2025", excerpt: "What started as moving a fridge revealed major water damage — drywall, flooring, paint, and new cabinet all restored.", description: "When a customer asked us to help move a heavy fridge, we discovered significant water damage. We transformed the unfortunate scenario into a fresh renovation — restoring drywall, flooring, painting, and installing new cabinet and trim.", image: `${CDN}/shower-recaulking_4ec1b209.webp`, tags: ["kitchen water damage repair", "drywall repair", "flooring installation", "cabinet installation", "Camas WA"], location: "Camas, WA" },
-  { id: 6, title: "Shower Re-Caulking Service in Camas", category: "Caulking", date: "September 15, 2025", excerpt: "Removed old caulk, prepped the surface, and applied fresh caulk — shower left in top condition.", description: "A busy customer barely had the time or tools for a shower re-caulking service. We carefully prepared the surface before applying new caulk — making sure the job was done right and saving the customer valuable time.", image: `${CDN}/shower-recaulking_4ec1b209.webp`, tags: ["shower re-caulking", "caulking removal", "new caulk application", "Camas WA", "Clark County"], location: "Camas, WA" },
-  { id: 7, title: "Porch Step & Lattice Replacement in Battle Ground", category: "Stairs & Railings", date: "September 15, 2025", excerpt: "Replaced rotting steps and privacy lattice for a returning client — curb appeal and safety fully restored.", description: "We completed a porch step and lattice replacement for a returning client whose front porch steps and privacy lattice had started to rot. This boosted the appeal of their home and increased the longevity and safety of their porch.", image: `${CDN}/porch-lattice_1e6a1918.jpg`, tags: ["porch step repair", "lattice installation", "front porch remodel", "Battle Ground WA", "Clark County"], location: "Battle Ground, WA" },
-  { id: 8, title: "Kitchen Island Appliance Installation in Vancouver", category: "Appliance Installation", date: "August 1, 2025", excerpt: "Installed a telescoping downdraft and gas cooktop on a newly countered kitchen island — more functional and better looking.", description: "We installed a telescoping downdraft and a gas cooktop to match our client's newly installed countertops. The client noted: 'Marcin did an excellent job installing my cooktop and downdraft. He arrived promptly and listened carefully to what I wanted. I would definitely recommend him.'", image: `${CDN}/kitchen-island_b506045b.jpg`, tags: ["appliance installation", "gas cooktop installation", "kitchen island upgrade", "telescoping downdraft", "Vancouver WA"], location: "Vancouver, WA" },
-  { id: 9, title: "Pressure Washing Service in Vancouver", category: "Pressure Washing", date: "July 1, 2025", excerpt: "Years of grime, moss, and tough stains wiped out from a driveway — curb appeal fully restored in one visit.", description: "Years of grime, moss, and tough stains completely wiped out with our power-packed pressure washing service. We take pride in rejuvenating your property's exterior, rapidly boosting its curb appeal across Clark County.", image: `${CDN}/pressure-washing-driveway_42597364.jpg`, tags: ["pressure washing", "driveway cleaning", "moss removal", "curb appeal", "Vancouver WA"], location: "Vancouver, WA" },
-  { id: 10, title: "Deck Pressure Washing in Camas", category: "Pressure Washing", date: "July 1, 2025", excerpt: "Renewed a weather-beaten, moss-covered deck — now clean, safe, and prepped for summer.", description: "We helped a homeowner in Camas rediscover the beauty of their deck. Weather-beaten and rendered unsafe due to moss build-up, we renewed it with a robust session of deck pressure washing — now clean as a whistle and safe for foot traffic.", image: `${CDN}/deck-pressure-washing_fb06fd69.webp`, tags: ["deck pressure washing", "moss removal", "deck restoration", "Camas WA", "Clark County"], location: "Camas, WA" },
-  { id: 11, title: "House Washing Services in Vancouver", category: "Pressure Washing", date: "July 1, 2025", excerpt: "Low-pressure house wash removed dirt, mildew, and grime from siding — exterior restored to original curb appeal.", description: "The siding was covered in dirt, mildew, and grime. We performed a low-pressure house wash — resulting in a stunning, bright, and refreshed exterior restored to its original curb appeal with no surface damage.", image: `${CDN}/house-washing_aa00df1e.webp`, tags: ["pressure washing", "house wash", "siding cleaning", "curb appeal restoration", "Vancouver WA"], location: "Vancouver, WA" },
-  { id: 12, title: "Window Cleaning Service in Camas", category: "Windows", date: "June 16, 2025", excerpt: "Cleaned windows buried under dust, streaks, and spider webs — sills, tracks, and screens included.", description: "These windows in Camas were hidden behind layers of dust, streaks, and spider webs. Now they're sparkling and fresh — letting the light flood back in. We clean windows, interior sills, tracks, and screens throughout Clark County.", image: `${CDN}/window-cleaning_66a54ef2.jpg`, tags: ["window cleaning", "streak removal", "interior sill cleaning", "Camas WA", "Clark County"], location: "Camas, WA" },
-];
+import { X, Calendar, Tag, ChevronLeft, ChevronRight, MapPin, ZoomIn, BookOpen, Images, ExternalLink } from "lucide-react";
+import { projects } from "@/lib/projects";
 
 // ─── PHOTO GALLERY DATA ───────────────────────────────────────────────────────
 // TO ADD MORE PHOTOS: append a new object with id, src (CDN URL), caption, and optional tag.
@@ -64,7 +38,7 @@ const photos: Photo[] = [
   { id: 14, src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663386531688/qMQRAbINWFvrUPEB.jpg", caption: "Bathroom remodel featuring new flooring, trim, and toilet replacement", tag: "Remodel" },
   { id: 15, src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663386531688/jPOgJPckBdaPcCPr.jpg", caption: "Room transformation with new flooring, light-colored paint, and window blinds", tag: "Before & After" },
   { id: 16, src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663386531688/AwSmGNttlDLyBDuO.jpg", caption: "Complete room transformation — empty yellow space to modern kitchen and laundry area", tag: "Before & After" },
-  { id: 17, src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663386531688/yzuTNmsrwjoSvvTt.jpg", caption: "House exterior before and after — newly installed white gutters", tag: "Before & After" },
+  { id: 17, src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663386531688/EKXlBvFJJCfWtUEZ.jpg", caption: "Bathroom remodel with new shower tiles, vanity, and modern fixtures", tag: "Remodel" },
   { id: 18, src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663386531688/ryLhHcoLDKcrOody.jpg", caption: "Living room transformation with hardwood flooring, recessed lighting, and updated fireplace", tag: "Remodel" },
   { id: 19, src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663386531688/xwDBZkjnyzCPfPzP.jpg", caption: "Bathroom transformation with new tiles, vanity, and modern fixtures", tag: "Before & After" },
   { id: 20, src: "https://files.manuscdn.com/user_upload_by_module/session_file/310519663386531688/NnOoZJHBczCXjeKB.jpg", caption: "Basement room transformation with new flooring, recessed lighting, and fresh paint", tag: "Before & After" },
@@ -82,7 +56,7 @@ export default function Gallery() {
 
   // Project Stories state
   const [activeCategory, setActiveCategory] = useState("All");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const [modalIndex, setModalIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -93,7 +67,7 @@ export default function Gallery() {
   // ── Project Stories handlers ──
   const filteredProjects = activeCategory === "All" ? projects : projects.filter((p) => p.category === activeCategory);
 
-  const openProjectModal = (project: Project) => {
+  const openProjectModal = (project: typeof projects[0]) => {
     const idx = filteredProjects.findIndex((p) => p.id === project.id);
     setSelectedProject(project);
     setModalIndex(idx);
@@ -183,20 +157,35 @@ export default function Gallery() {
             <button onClick={() => scrollCarousel("right")} className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full flex items-center justify-center shadow-lg" style={{ backgroundColor: "oklch(1 0 0)", color: "oklch(0.22 0.07 160)", border: "1px solid oklch(0.88 0.015 80)" }} aria-label="Scroll right"><ChevronRight size={20} /></button>
             <div ref={carouselRef} className="flex gap-5 overflow-x-auto px-12 pb-4" style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}>
               {filteredProjects.map((project) => (
-                <article key={project.id} onClick={() => openProjectModal(project)}
+                <article key={project.id}
                   className="flex-none rounded-xl overflow-hidden border cursor-pointer group"
                   style={{ width: "300px", backgroundColor: "oklch(1 0 0)", borderColor: "oklch(0.88 0.015 80)", boxShadow: "0 2px 8px oklch(0 0 0 / 0.06)", transition: "box-shadow 0.25s ease, transform 0.25s ease" }}
                   onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 28px oklch(0 0 0 / 0.14)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = "0 2px 8px oklch(0 0 0 / 0.06)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
-                  <div className="relative overflow-hidden" style={{ height: "180px" }}>
+                  {/* Thumbnail — clicking opens the modal quick-view */}
+                  <div className="relative overflow-hidden" style={{ height: "180px" }} onClick={() => openProjectModal(project)}>
                     <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                     <span className="absolute top-2 left-2 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider" style={{ backgroundColor: "oklch(0.32 0.07 160)", color: "oklch(1 0 0)", fontFamily: "'Source Sans 3', sans-serif", letterSpacing: "0.07em" }}>{project.category}</span>
                   </div>
-                  <div className="p-4">
+                  <div className="p-4" onClick={() => openProjectModal(project)}>
                     <div className="flex items-center gap-1 text-xs mb-1.5" style={{ color: "oklch(0.60 0.04 65)", fontFamily: "'Source Sans 3', sans-serif" }}><Calendar size={11} /><span>{project.date}</span></div>
                     <h3 className="font-bold text-base mb-1.5 leading-snug" style={{ fontFamily: "'Playfair Display', serif", color: "oklch(0.22 0.07 160)" }}>{project.title}</h3>
                     <p className="text-xs leading-relaxed mb-3" style={{ color: "oklch(0.48 0.02 80)", fontFamily: "'Source Sans 3', sans-serif" }}>{project.excerpt}</p>
-                    <div className="flex items-center gap-1 text-xs" style={{ color: "oklch(0.55 0.04 65)" }}><MapPin size={11} /><span style={{ fontFamily: "'Source Sans 3', sans-serif" }}>{project.location}</span></div>
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-1 text-xs" style={{ color: "oklch(0.55 0.04 65)" }}><MapPin size={11} /><span style={{ fontFamily: "'Source Sans 3', sans-serif" }}>{project.location}</span></div>
+                      {/* "Full Story" link — opens in new tab */}
+                      <a
+                        href={`/project/${project.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 text-xs font-semibold transition-opacity hover:opacity-70"
+                        style={{ color: "oklch(0.32 0.07 160)", textDecoration: "none", fontFamily: "'Source Sans 3', sans-serif", whiteSpace: "nowrap" }}
+                        title={`View full story: ${project.title}`}
+                      >
+                        Full Story <ExternalLink size={10} />
+                      </a>
+                    </div>
                   </div>
                 </article>
               ))}
@@ -250,7 +239,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* ══ Project Story Modal ══ */}
+      {/* ══ Project Story Modal (quick-view) ══ */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: "oklch(0 0 0 / 0.82)" }} onClick={closeProjectModal}>
           <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl" style={{ backgroundColor: "oklch(1 0 0)" }} onClick={(e) => e.stopPropagation()}>
@@ -276,6 +265,16 @@ export default function Gallery() {
               <div className="flex flex-wrap gap-3">
                 <button className="hcp-button" onClick={() => { closeProjectModal(); (window as any).HCPWidget?.openModal(); }}>Request Estimate</button>
                 <a href="tel:+13605449858" className="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-semibold text-sm border transition-colors" style={{ borderColor: "oklch(0.32 0.07 160)", color: "oklch(0.32 0.07 160)", fontFamily: "'Source Sans 3', sans-serif", textDecoration: "none" }}>Call (360) 544-9858</a>
+                <a
+                  href={`/project/${selectedProject.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-semibold text-sm border transition-colors"
+                  style={{ borderColor: "oklch(0.60 0.04 80)", color: "oklch(0.40 0.04 80)", fontFamily: "'Source Sans 3', sans-serif", textDecoration: "none" }}
+                >
+                  <ExternalLink size={14} />
+                  Full Story
+                </a>
               </div>
               <p className="text-xs mt-4 text-center" style={{ color: "oklch(0.65 0.02 80)", fontFamily: "'Source Sans 3', sans-serif" }}>Project {modalIndex + 1} of {filteredProjects.length}</p>
             </div>
