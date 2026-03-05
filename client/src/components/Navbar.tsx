@@ -7,6 +7,8 @@ declare global {
   }
 }
 
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-full_e2e1ece6.png";
+
 const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Gallery", href: "#gallery" },
@@ -33,9 +35,7 @@ export default function Navbar() {
   return (
     <nav
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "shadow-lg"
-          : "shadow-sm"
+        scrolled ? "shadow-lg" : "shadow-sm"
       }`}
       style={{
         backgroundColor: scrolled ? "oklch(0.97 0.015 80)" : "oklch(1 0 0)",
@@ -44,30 +44,13 @@ export default function Navbar() {
     >
       <div className="container flex items-center justify-between h-16">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 shrink-0">
-          <div
-            className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
-            style={{ backgroundColor: "oklch(0.32 0.07 160)" }}
-          >
-            HP
-          </div>
-          <div>
-            <div
-              className="font-bold text-base leading-tight"
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                color: "oklch(0.32 0.07 160)",
-              }}
-            >
-              Handy Pioneers
-            </div>
-            <div
-              className="text-xs leading-tight"
-              style={{ color: "oklch(0.50 0.02 80)", fontFamily: "'Source Sans 3', sans-serif" }}
-            >
-              Vancouver, WA
-            </div>
-          </div>
+        <a href="#" className="flex items-center gap-2 shrink-0">
+          <img
+            src={LOGO_URL}
+            alt="Handy Pioneers LLC Logo"
+            className="h-12 w-auto object-contain"
+            style={{ maxWidth: "180px" }}
+          />
         </a>
 
         {/* Desktop Nav Links */}
@@ -97,10 +80,7 @@ export default function Navbar() {
           >
             (360) 544-9858
           </a>
-          <button
-            className="hcp-button"
-            onClick={handleBookOnline}
-          >
+          <button className="hcp-button" onClick={handleBookOnline}>
             Book Online
           </button>
         </div>

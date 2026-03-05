@@ -1,5 +1,7 @@
 import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
 
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-full_e2e1ece6.png";
+
 const servicesList = [
   "Cabinets", "Carpentry", "Decking", "Doors", "Fencing",
   "Flooring", "General Contracting", "Gutter Cleaning",
@@ -22,20 +24,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
-                style={{ backgroundColor: "oklch(0.32 0.07 160)" }}
-              >
-                HP
-              </div>
-              <div
-                className="text-xl font-bold text-white"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Handy Pioneers
-              </div>
-            </div>
+          <div className="mb-5">
+            <img
+              src={LOGO_URL}
+              alt="Handy Pioneers LLC"
+              className="h-20 w-auto object-contain"
+              style={{ filter: "brightness(0) invert(1)", opacity: 0.90 }}
+            />
+          </div>
             <p
               className="text-sm leading-relaxed mb-6"
               style={{ color: "rgba(255,255,255,0.60)", fontFamily: "'Source Sans 3', sans-serif" }}

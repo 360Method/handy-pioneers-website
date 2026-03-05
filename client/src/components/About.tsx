@@ -86,20 +86,20 @@ export default function About() {
 
               {/* Floating credential card */}
               <div
-                className="absolute -bottom-6 -left-6 rounded-xl p-5 shadow-xl"
-                style={{ backgroundColor: "oklch(0.32 0.07 160)", maxWidth: "220px" }}
+                className="absolute -bottom-6 -left-6 rounded-xl p-4 shadow-xl flex flex-col items-center"
+                style={{ backgroundColor: "oklch(0.32 0.07 160)", maxWidth: "200px" }}
               >
+                <img
+                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-full_e2e1ece6.png"
+                  alt="Handy Pioneers LLC"
+                  className="w-24 h-auto object-contain mb-2"
+                  style={{ filter: "brightness(0) invert(1)", opacity: 0.90 }}
+                />
                 <div
-                  className="text-3xl font-bold text-white mb-1"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
-                >
-                  5★
-                </div>
-                <div
-                  className="text-sm text-white/80 leading-tight"
+                  className="text-xs text-white/80 text-center leading-tight"
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                 >
-                  Rated on Google &amp; Facebook by Clark County homeowners
+                  5★ Rated · Clark County, WA
                 </div>
               </div>
 
