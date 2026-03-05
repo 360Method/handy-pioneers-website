@@ -90,10 +90,10 @@ export default function About() {
                 style={{ backgroundColor: "oklch(0.32 0.07 160)", maxWidth: "200px" }}
               >
                 <img
-                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-full_e2e1ece6.png"
+                  src="https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-transparent_c9fbf0d1.png"
                   alt="Handy Pioneers LLC"
                   className="w-24 h-auto object-contain mb-2"
-                  style={{ filter: "brightness(0) invert(1)", opacity: 0.90 }}
+                  style={{ opacity: 0.95 }}
                 />
                 <div
                   className="text-xs text-white/80 text-center leading-tight"

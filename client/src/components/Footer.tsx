@@ -1,6 +1,6 @@
 import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
 
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-full_e2e1ece6.png";
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-transparent_c9fbf0d1.png";
 
 const servicesList = [
   "Cabinets", "Carpentry", "Decking", "Doors", "Fencing",
@@ -29,7 +29,7 @@ export default function Footer() {
               src={LOGO_URL}
               alt="Handy Pioneers LLC"
               className="h-20 w-auto object-contain"
-              style={{ filter: "brightness(0) invert(1)", opacity: 0.90 }}
+              style={{ opacity: 0.95 }}
             />
           </div>
             <p

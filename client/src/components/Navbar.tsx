@@ -7,7 +7,7 @@ declare global {
   }
 }
 
-const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-full_e2e1ece6.png";
+const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-logo-transparent_c9fbf0d1.png";
 
 const navLinks = [
   { label: "Services", href: "#services" },
