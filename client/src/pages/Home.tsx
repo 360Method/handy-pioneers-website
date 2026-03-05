@@ -11,7 +11,6 @@ import About from "@/components/About";
 import FinalCTA from "@/components/FinalCTA";
 import LocationMap from "@/components/LocationMap";
 import Footer from "@/components/Footer";
-import MobileCTABar from "@/components/MobileCTABar";
 
 export default function Home() {
   // Scroll reveal animation
@@ -36,7 +35,6 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <TopBar />
-      <MobileCTABar />
       <Navbar />
       <main>
         <Hero />

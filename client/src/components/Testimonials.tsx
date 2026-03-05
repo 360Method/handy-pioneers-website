@@ -1,4 +1,3 @@
-import { Star } from "lucide-react";
 import { useEffect } from "react";
 
 export default function Testimonials() {
@@ -31,19 +30,7 @@ export default function Testimonials() {
           >
             Customer Reviews
           </h2>
-          <div className="flex items-center justify-center gap-2">
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={20} fill="#C8892A" color="#C8892A" />
-              ))}
-            </div>
-            <span
-              className="text-base font-semibold"
-              style={{ color: "oklch(0.45 0.02 80)", fontFamily: "'Source Sans 3', sans-serif" }}
-            >
-              5.0 · Verified Google Reviews
-            </span>
-          </div>
+
         </div>
 
         {/* Elfsight Google Reviews widget */}
