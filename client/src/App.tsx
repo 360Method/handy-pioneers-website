@@ -6,6 +6,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
 import ThankYou from "./pages/ThankYou";
+import BlogIndex from "./pages/BlogIndex";
+import BlogPost from "./pages/BlogPost";
 
 function Router() {
   return (
@@ -15,6 +17,9 @@ function Router() {
       <Route path="/project/:slug" component={ProjectDetail} />
       {/* Post-inquiry thank you page */}
       <Route path="/thankyou" component={ThankYou} />
+      {/* Blog section */}
+      <Route path="/blog" component={BlogIndex} />
+      <Route path="/blog/:slug" component={BlogPost} />
       {/* 301-style redirects: all old paths → home */}
       <Route path="/about" component={Home} />
       <Route path="/services" component={Home} />
