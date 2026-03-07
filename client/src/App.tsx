@@ -17,8 +17,7 @@ function Router() {
       <Route path="/project/:slug" component={ProjectDetail} />
       {/* Post-inquiry thank you page */}
       <Route path="/thankyou" component={ThankYou} />
-      {/* Blog section */}
-      <Route path="/blog" component={BlogIndex} />
+      {/* Blog post detail pages — open in new tab from homepage blog section */}
       <Route path="/blog/:slug" component={BlogPost} />
       {/* 301-style redirects: all old paths → home */}
       <Route path="/about" component={Home} />

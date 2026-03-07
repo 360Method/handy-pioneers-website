@@ -9,6 +9,7 @@ import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
 import About from "@/components/About";
 import FinalCTA from "@/components/FinalCTA";
+import BlogSection from "@/components/BlogSection";
 import LocationMap from "@/components/LocationMap";
 import Footer from "@/components/Footer";
 
@@ -44,6 +45,7 @@ export default function Home() {
         <HowItWorks />
         <Gallery />
         <Testimonials />
+        <BlogSection />
         <FinalCTA />
         <LocationMap />
       </main>
