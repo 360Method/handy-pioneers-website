@@ -221,24 +221,69 @@ export default function BlogPost() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (post) {
-      document.title = post.seoTitle || `${post.title} | Handy Pioneers`;
-      // Update meta description dynamically
-      let metaDesc = document.querySelector('meta[name="description"]');
-      if (!metaDesc) {
-        metaDesc = document.createElement("meta");
-        (metaDesc as HTMLMetaElement).name = "description";
-        document.head.appendChild(metaDesc);
+
+    const setMeta = (selector: string, attr: string, value: string) => {
+      let el = document.querySelector(selector) as HTMLMetaElement | null;
+      if (!el) {
+        el = document.createElement("meta");
+        const [attrName, attrVal] = selector
+          .replace('meta[', '')
+          .replace(']', '')
+          .split('="');
+        el.setAttribute(attrName, attrVal.replace('"', ''));
+        document.head.appendChild(el);
       }
-      (metaDesc as HTMLMetaElement).content =
-        post.seoDesc || post.excerpt;
+      el.setAttribute(attr, value);
+    };
+
+    if (post) {
+      const title = post.seoTitle || `${post.title} | Handy Pioneers`;
+      const desc = post.seoDesc || post.excerpt;
+      const image = post.image;
+      const url = currentUrl;
+
+      document.title = title;
+
+      // Standard meta
+      setMeta('meta[name="description"]', 'content', desc);
+
+      // Open Graph
+      setMeta('meta[property="og:title"]', 'content', title);
+      setMeta('meta[property="og:description"]', 'content', desc);
+      setMeta('meta[property="og:image"]', 'content', image);
+      setMeta('meta[property="og:url"]', 'content', url);
+      setMeta('meta[property="og:type"]', 'content', 'article');
+
+      // Twitter / X Card
+      setMeta('meta[name="twitter:title"]', 'content', title);
+      setMeta('meta[name="twitter:description"]', 'content', desc);
+      setMeta('meta[name="twitter:image"]', 'content', image);
+      setMeta('meta[name="twitter:card"]', 'content', 'summary_large_image');
     } else {
       document.title = "Post Not Found | Handy Pioneers";
     }
+
     return () => {
+      // Restore site-level defaults on unmount
+      const siteTitle = "Vancouver Handyman & Remodeling Contractor, Handy Pioneers | Free Estimates For Our Professional Handyman Services";
+      const siteDesc = "Free Estimates. 5 Star Rated. Licensed & Insured. Handy Pioneers is the #1 Vancouver Handyman & Remodeling Service. Call or visit today.";
+      const siteImage = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/og-image_2d8f1c3a.jpg";
+      const siteUrl = "https://handypioneers.com/";
       document.title = "Handy Pioneers — Reliable Renovations, Trusted Results";
+      const restore = (selector: string, value: string) => {
+        const el = document.querySelector(selector) as HTMLMetaElement | null;
+        if (el) el.setAttribute('content', value);
+      };
+      restore('meta[name="description"]', siteDesc);
+      restore('meta[property="og:title"]', siteTitle);
+      restore('meta[property="og:description"]', siteDesc);
+      restore('meta[property="og:image"]', siteImage);
+      restore('meta[property="og:url"]', siteUrl);
+      restore('meta[name="twitter:title"]', siteTitle);
+      restore('meta[name="twitter:description"]', siteDesc);
+      restore('meta[name="twitter:image"]', siteImage);
     };
-  }, [post]);
+  }, [post, currentUrl]);
 
   if (!post) {
     return (
