@@ -7,7 +7,7 @@
 
 import { useEffect } from "react";
 import { useParams } from "wouter";
-import { blogPosts, BlogBlock } from "@/lib/blog";
+import { getPublishedPosts, BlogBlock } from "@/lib/blog";
 import {
   ArrowLeft,
   Clock,
@@ -211,7 +211,8 @@ function RenderBlock({ block }: { block: BlogBlock }) {
 export default function BlogPost() {
   const params = useParams<{ slug: string }>();
   const slug = params.slug;
-  const post = blogPosts.find((p) => p.slug === slug);
+  // Drip-release: only allow access to posts whose publishDate has passed
+  const post = getPublishedPosts().find((p) => p.slug === slug);
 
   const currentUrl =
     typeof window !== "undefined"

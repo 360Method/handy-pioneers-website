@@ -5,13 +5,12 @@
  * Design: Pacific Northwest Craftsman — matches main site aesthetic.
  */
 
-import { blogPosts } from "@/lib/blog";
+import { getPublishedPosts } from "@/lib/blog";
 import { Clock, Tag, ArrowRight, BookOpen } from "lucide-react";
 
 export default function BlogSection() {
-  const sorted = [...blogPosts].sort(
-    (a, b) => new Date(b.isoDate).getTime() - new Date(a.isoDate).getTime()
-  );
+  // Drip-release: only show posts whose publishDate is today or in the past
+  const sorted = getPublishedPosts();
 
   return (
     <section
