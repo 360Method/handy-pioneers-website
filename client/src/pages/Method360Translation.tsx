@@ -241,6 +241,40 @@ export default function Method360Translation() {
         </div>
       </section>
 
+      {/* ─── What's Next: Membership CTA ─── */}
+      <section className="py-16" style={{ backgroundColor: "oklch(0.22 0.07 160)" }}>
+        <div className="container max-w-3xl text-center">
+          <div
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded mb-5"
+            style={{ backgroundColor: "oklch(0.65 0.14 65)", color: "white", fontFamily: "'Source Sans 3', sans-serif" }}
+          >
+            What Happens After Your Roadmap
+          </div>
+          <h2
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
+            style={{ fontFamily: "'Playfair Display', serif" }}
+          >
+            Don't Let the Roadmap Sit in a Drawer.
+          </h2>
+          <p
+            className="text-base leading-relaxed mb-8 mx-auto"
+            style={{ color: "rgba(255,255,255,0.70)", fontFamily: "'Source Sans 3', sans-serif", maxWidth: "520px" }}
+          >
+            Most homeowners receive a prioritized roadmap, set good intentions, and find themselves
+            six months later with the same list — plus a few new items that escalated while they
+            waited. The 360° Maintenance Membership puts your NOW, SOON, and WAIT items on a
+            managed schedule. We execute. You own a better asset.
+          </p>
+          <button
+            onClick={() => navigate("/360-method/membership")}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded font-bold uppercase tracking-wide text-sm transition-all hover:opacity-90"
+            style={{ backgroundColor: "oklch(0.65 0.14 65)", color: "white", fontFamily: "'Source Sans 3', sans-serif" }}
+          >
+            Explore Membership <ArrowRight size={16} />
+          </button>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
