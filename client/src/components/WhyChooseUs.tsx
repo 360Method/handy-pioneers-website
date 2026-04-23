@@ -25,7 +25,7 @@ const values = [
   {
     icon: Users,
     title: "Direct Access to Marcin",
-    desc: "You work with the owner, not a dispatcher. Marcin personally oversees every project from estimate to completion.",
+    desc: "You work directly with the owner. Marcin personally oversees every project from estimate to completion.",
   },
   {
     icon: Hammer,
