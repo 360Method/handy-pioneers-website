@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { openBooking } from "@/lib/bookUrl";
 
 export default function LocationMap() {
   return (
@@ -154,7 +155,7 @@ export default function LocationMap() {
 
             <button
               className="hcp-button w-full mt-8"
-              onClick={() => (window as any).HCPWidget?.openModal()}
+              onClick={() => openBooking("location-map")}
             >
               Request Free Estimate
             </button>

@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { useLocation } from "wouter";
-
-declare global {
-  interface Window {
-    HCPWidget?: { openModal: () => void };
-  }
-}
+import { openBooking } from "@/lib/bookUrl";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-full-logo_4f724ec4.jpg";
 const NAVBAR_HEIGHT = 72; // px — matches scroll-padding-top in index.css
@@ -83,11 +78,7 @@ export default function Navbar() {
     }
   };
 
-  const handleBookOnline = () => {
-    if (window.HCPWidget) {
-      window.HCPWidget.openModal();
-    }
-  };
+  const handleBookOnline = (source: string) => () => openBooking(source);
 
   return (
     <nav
@@ -155,7 +146,7 @@ export default function Navbar() {
           >
             (360) 544-9858
           </a>
-          <button className="hcp-button" onClick={handleBookOnline}>
+          <button className="hcp-button" onClick={handleBookOnline("nav")}>
             Request Estimate
           </button>
         </div>
@@ -201,7 +192,7 @@ export default function Navbar() {
           >
             Call: (360) 544-9858
           </a>
-          <button className="hcp-button w-full mt-2" onClick={handleBookOnline}>
+          <button className="hcp-button w-full mt-2" onClick={handleBookOnline("nav-mobile")}>
             Request Estimate
           </button>
         </div>

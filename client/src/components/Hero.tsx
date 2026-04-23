@@ -1,17 +1,10 @@
 import { Star } from "lucide-react";
-
-declare global {
-  interface Window {
-    HCPWidget?: { openModal: () => void };
-  }
-}
+import { openBooking } from "@/lib/bookUrl";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-hero-bg-R4GcYQJHeouBp86VQhqvCa.webp";
 
 export default function Hero() {
-  const handleBookOnline = () => {
-    if (window.HCPWidget) window.HCPWidget.openModal();
-  };
+  const handleBookOnline = () => openBooking("homepage-hero");
 
   return (
     <section

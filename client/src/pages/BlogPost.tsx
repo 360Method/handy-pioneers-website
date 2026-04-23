@@ -20,18 +20,13 @@ import {
   Phone,
 } from "lucide-react";
 import { toast } from "sonner";
+import { openBooking } from "@/lib/bookUrl";
 
 const LOGO_URL =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663386531688/PMFhFJDf55eBmmtmS9ai7o/hp-full-logo_4f724ec4.jpg";
 
 // GMB profile link
 const GMB_URL = "https://share.google/OJgEhJ3AIQZ7AZP";
-
-declare global {
-  interface Window {
-    HCPWidget?: { openModal: () => void };
-  }
-}
 
 function ShareButtons({ title, url }: { title: string; url: string }) {
   const encoded = encodeURIComponent(url);
@@ -183,7 +178,7 @@ function RenderBlock({ block }: { block: BlogBlock }) {
           <div className="flex flex-wrap justify-center gap-3">
             <button
               className="hcp-button"
-              onClick={() => window.HCPWidget?.openModal()}
+              onClick={() => openBooking("blog-post-inline-cta")}
               style={{ fontSize: "0.95rem", padding: "0.75rem 1.75rem" }}
             >
               {block.ctaLabel || "Request Estimate"}
@@ -341,7 +336,7 @@ export default function BlogPost() {
             </a>
             <button
               className="hcp-button"
-              onClick={() => window.HCPWidget?.openModal()}
+              onClick={() => openBooking("blog-post-header")}
               style={{ fontSize: "0.8rem", padding: "0.5rem 1.25rem" }}
             >
               Request Estimate

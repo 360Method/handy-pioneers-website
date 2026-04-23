@@ -1,4 +1,5 @@
 import { Hammer, PaintBucket, Layers, DoorOpen, Fence, Wrench, TreePine, Home, Droplets, Tv, Wind, LayoutGrid, Scissors, Settings, Brush, Ruler, Zap, CheckSquare } from "lucide-react";
+import { openBooking } from "@/lib/bookUrl";
 
 const services = [
   { icon: LayoutGrid, name: "Cabinets", desc: "Repair, installation & refinishing" },
@@ -89,7 +90,7 @@ export default function Services() {
           </p>
           <button
             className="hcp-button"
-            onClick={() => (window as any).HCPWidget?.openModal()}
+            onClick={() => openBooking("services")}
           >
             Request a Free Estimate
           </button>

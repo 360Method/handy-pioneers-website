@@ -9,13 +9,7 @@ import { useEffect } from "react";
 import { useParams, Link } from "wouter";
 import { projects } from "@/lib/projects";
 import { Calendar, MapPin, Tag, ArrowLeft, Phone } from "lucide-react";
-
-// Housecall Pro booking widget trigger
-declare global {
-  interface Window {
-    HCPWidget?: { openModal: () => void };
-  }
-}
+import { openBooking } from "@/lib/bookUrl";
 
 export default function ProjectDetail() {
   const params = useParams<{ slug: string }>();
@@ -107,7 +101,7 @@ export default function ProjectDetail() {
             </a>
             <button
               className="hcp-button"
-              onClick={() => window.HCPWidget?.openModal()}
+              onClick={() => openBooking("project-detail-header")}
               style={{ fontSize: "0.8rem", padding: "0.5rem 1.25rem" }}
             >
               Request Estimate
@@ -246,7 +240,7 @@ export default function ProjectDetail() {
           <div className="flex flex-wrap justify-center gap-3">
             <button
               className="hcp-button"
-              onClick={() => window.HCPWidget?.openModal()}
+              onClick={() => openBooking("project-detail-footer")}
               style={{ fontSize: "1rem", padding: "0.875rem 2rem" }}
             >
               Request Estimate Online

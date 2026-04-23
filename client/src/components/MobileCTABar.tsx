@@ -4,18 +4,10 @@
  * so it doesn't conflict with the Google Reviews floater at the bottom.
  */
 
-declare global {
-  interface Window {
-    HCPWidget?: { openModal: () => void };
-  }
-}
+import { openBooking } from "@/lib/bookUrl";
 
 export default function MobileCTABar() {
-  const handleEstimate = () => {
-    if (window.HCPWidget) {
-      window.HCPWidget.openModal();
-    }
-  };
+  const handleEstimate = () => openBooking("mobile-cta-bar");
 
   return (
     <div className="md:hidden flex w-full" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.12)" }}>

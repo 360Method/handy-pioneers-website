@@ -4,6 +4,7 @@
  * Positioned after Testimonials to convert visitors who have seen social proof
  */
 import { BadgeCheck, Clock, FileText, Users, Hammer, ThumbsUp } from "lucide-react";
+import { openBooking } from "@/lib/bookUrl";
 
 const values = [
   {
@@ -114,7 +115,7 @@ export default function WhyChooseUs() {
           </p>
           <button
             className="hcp-button text-base px-8 py-4"
-            onClick={() => (window as any).HCPWidget?.openModal()}
+            onClick={() => openBooking("why-choose-us")}
           >
             Get a Free Estimate
           </button>

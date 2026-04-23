@@ -1,3 +1,5 @@
+import { openBooking } from "@/lib/bookUrl";
+
 const steps = [
   {
     num: "01",
@@ -83,7 +85,7 @@ export default function HowItWorks() {
         <div className="text-center mt-12 reveal">
           <button
             className="hcp-button"
-            onClick={() => (window as any).HCPWidget?.openModal()}
+            onClick={() => openBooking("how-it-works")}
           >
             📅 Start Your Project
           </button>

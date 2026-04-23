@@ -12,6 +12,7 @@
 
 import { useState } from "react";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { openBooking } from "@/lib/bookUrl";
 
 interface Photo {
   id: number;
@@ -302,7 +303,7 @@ export default function HeroGallery() {
         <div className="text-center mt-10 reveal">
           <button
             className="hcp-button"
-            onClick={() => (window as any).HCPWidget?.openModal()}
+            onClick={() => openBooking("hero-gallery")}
           >
             Request Estimate Today
           </button>

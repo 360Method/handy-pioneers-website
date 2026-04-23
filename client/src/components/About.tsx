@@ -1,4 +1,5 @@
 import { CheckCircle } from "lucide-react";
+import { openBooking } from "@/lib/bookUrl";
 
 const credentials = [
   "Licensed Contractor — WA License HANDYP*761NH",
@@ -65,7 +66,7 @@ export default function About() {
 
             <button
               className="hcp-button"
-              onClick={() => (window as any).HCPWidget?.openModal()}
+              onClick={() => openBooking("about")}
             >
               Work With Us
             </button>
